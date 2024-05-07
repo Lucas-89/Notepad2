@@ -11,6 +11,7 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -19,23 +20,32 @@ import com.example.notepad2.ui.theme.Notepad2Theme
 @Composable
 fun MainPage( modifier: Modifier = Modifier) {
     val navHostController = rememberNavController()
+
     Scaffold (
         modifier = modifier,
         topBar = { MainTopAppBar() }
     ){
-            NavHost(
-                    modifier =Modifier.padding(it),
-                    navController = navHostController,
-                    startDestination = "lista"
-            ) {
-                composable("lista"){ ListaPage()}
-                composable("detalle"){ DetallePage()}
-                composable("crear"){ CrearPage()}
-            }
-            //TODO: Agregar el contenido
-
+        MainNavHost(
+            modifier= Modifier.padding(it),
+            navHostController = navHostController
+        )
     }
 }
+
+@Composable
+fun MainNavHost(modifier: Modifier = Modifier, navHostController: NavHostController){
+    NavHost(
+        modifier = modifier,
+        navController = navHostController,
+        startDestination = "lista"
+    ) {
+        composable("lista"){ ListaPage()}
+        composable("detalle"){ DetallePage()}
+        composable("crear"){ CrearPage()}
+    }
+}
+
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainTopAppBar(){
