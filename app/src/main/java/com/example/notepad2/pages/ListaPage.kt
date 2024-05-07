@@ -32,7 +32,7 @@ fun ListaPage(
 @Composable
 fun ListaPagePreview() {
     val notas = remember { mutableStateListOf<String>() }
-    
+
     Notepad2Theme {
         ListaPage(
             onNotaSelected = {},

@@ -7,7 +7,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.notepad2.ui.theme.Notepad2Theme
 
 @Composable
-fun CrearPage( modifier: Modifier = Modifier) {
+fun CrearNotaPage(modifier: Modifier = Modifier) {
     Text(
         text = "Crear Page",
         modifier = modifier
@@ -16,8 +16,8 @@ fun CrearPage( modifier: Modifier = Modifier) {
 
 @Preview(showBackground = true)
 @Composable
-fun CrearPagePreview() {
+fun CrearNotaPagePreview() {
     Notepad2Theme {
-        CrearPage()
+        CrearNotaPage()
     }
 }
