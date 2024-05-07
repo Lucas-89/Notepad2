@@ -29,17 +29,15 @@ fun MainPage( modifier: Modifier = Modifier) {
     val navHostController = rememberNavController()
     //creo un objeto para la lista de notas
     val notas = remember { mutableStateListOf<String>() }
-    val navBackStackEntry by navHostController.currentBackStackEntryAsState()
-    val currentRoute = navBackStackEntry?.destination?.route
+
 
     Scaffold (
         modifier = modifier,
         topBar = { MainTopAppBar() },
         floatingActionButton = {
-            if (currentRoute == "lista") {
                 BotonCrear(navHostController)
-            }
-            BotonCrear(navHostController)
+
+
         }
     ){
         MainNavHost(
@@ -52,8 +50,12 @@ fun MainPage( modifier: Modifier = Modifier) {
 
 @Composable
 fun BotonCrear(navHostController: NavHostController){
-    FloatingActionButton(onClick = {navHostController.navigate("crearNota")}) {
-        Icon(imageVector = Icons.Filled.Add, contentDescription = "nueva nota")
+    val navBackStackEntry by navHostController.currentBackStackEntryAsState()
+    val currentRoute = navBackStackEntry?.destination?.route
+    if (currentRoute == "lista") {
+        FloatingActionButton(onClick = { navHostController.navigate("crearNota") }) {
+            Icon(imageVector = Icons.Filled.Add, contentDescription = "nueva nota")
+        }
     }
 }
 
@@ -61,7 +63,7 @@ fun BotonCrear(navHostController: NavHostController){
 fun MainNavHost(
     modifier: Modifier = Modifier,
     navHostController: NavHostController,
-    notas : List<String>
+    notas : MutableList<String>
 ){
     NavHost(
         modifier = modifier,
@@ -79,6 +81,7 @@ fun MainNavHost(
             CrearNotaPage(
                 onNuevaNota = {
                     navHostController.popBackStack()
+                    notas.add("Primera nota")
                 }
             )
         }
